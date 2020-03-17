@@ -11,36 +11,36 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-  res.show('index.html');
+  res.show('home.html');
 });
 
 app.get('/about', (req, res) => {
   res.show('about.html');
 });
 
-app.get('/contact', (req, res) => {
-  res.show('contact.html');
-});
-
-app.get('/info', (req, res) => {
-  res.show('info.html');
-});
-
-app.get('/history', (req, res) => {
-  res.show('history.html');
+app.get('/home', (req, res) => {
+  res.show('home.html');
 });
 
 app.get('/style.css', (req, res) => {
   res.sendFile(path.join(__dirname + '/style.css'));
 });
 
-app.get('/test.png', (req, res) => {
-  res.sendFile(path.join(__dirname + '/test.png'));
+app.get('/error-404.jpg', (req, res) => {
+  res.sendFile(path.join(__dirname + '/error-404.jpg'));
 });
 
+app.use('/user', (req, res, next) => {
+  res.show('forbidden.html');
+})
+
 app.use((req, res) => {
-  res.status(404).send('404 not found...');
+  res.status(404).show('404.html');
 });
+
+// app.use((req, res) => {
+//   res.status(404).sendFile(path.join(__dirname + `/error-404.jpg`));
+// });
 
 app.listen(8000, () => {
   console.log('Server is running on port: 8000');
